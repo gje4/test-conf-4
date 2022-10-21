@@ -3,7 +3,7 @@ import { parseString } from "set-cookie-parser";
 
 const BigCommerce = require("node-bigcommerce");
 import getCartCookie from "./utils/get-cart-cookie";
-import { normalizeCart } from "@lib/bigcommerce/normalize";
+// import { normalizeCart } from "@lib/bigcommerce/normalize";
 import { Cart } from "@lib/bigcommerce/types/cart";
 
 export default async function cart(req: NextApiRequest, res: NextApiResponse) {
@@ -12,7 +12,7 @@ export default async function cart(req: NextApiRequest, res: NextApiResponse) {
   const API_TOKEN = process.env.BIGCOMMERCE_STORE_API_TOKEN;
   const CLIENT_ID = process.env.BIGCOMMERCE_STORE_API_CLIENT_ID;
 
-  const STORE_HASH = process.env.BIGCOMMERCE_STORE_HASH;
+  const STORE_HASH = process.env.BIGCOMMERCE_STORE_API_STORE_HASH;
   var bigCommerce = new BigCommerce({
     clientId: CLIENT_ID,
     accessToken: API_TOKEN,
@@ -29,7 +29,7 @@ export default async function cart(req: NextApiRequest, res: NextApiResponse) {
         const { data } = await bigCommerce.get(
           `/carts/${bc_cart}?include=line_items.physical_items.options`
         );
-        res.status(200).json(normalizeCart(data) || null);
+        res.status(200).json(data || null);
       }
     } catch (error) {
       // @ts-ignore

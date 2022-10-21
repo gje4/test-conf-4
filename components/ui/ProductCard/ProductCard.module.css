@@ -21,7 +21,7 @@ and only doing *positioning* in this module.
 }
 
 .name {
-  @apply w-3/4 text-ellipsis;
+  @apply w-3/4 text-center;
   @apply font-bold;
 
 }

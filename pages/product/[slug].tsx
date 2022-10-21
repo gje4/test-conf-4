@@ -1,14 +1,14 @@
-import type { GetStaticPathsContext, GetStaticPropsContext } from "next";
+import type { GetStaticPropsContext } from "next";
 import { Layout } from "@vercel/examples-ui";
 import ProductView from "@components/ui/ProductView";
-import { fetchProductPaths } from "@lib/bigcommerce/graphql/queries/fetch-product-paths";
+import { fetchCategoryProduct } from "@lib/bigcommerce/graphql/queries/fetch-category-product";
 import getProduct from "@bigcommerce/storefront-data-hooks/api/operations/get-product";
 import getAllProducts from "@bigcommerce/storefront-data-hooks/api/operations/get-all-products";
 import { Footer, Navbar, UIComponent, Container } from "@components/ui";
 import { getAllEntries } from "@lib/cms/cmsEntries";
 
 export async function getStaticPaths() {
-  const productPaths = await fetchProductPaths();
+  const productPaths = await fetchCategoryProduct();
   const paths = productPaths.map((path: string) => `/product${path}`);
 
   return {
@@ -43,7 +43,7 @@ export async function getStaticProps({
 
 function Slug(props: any) {
   const { product, relatedProducts, modular_blocks = [], navBar } = props;
-
+  console.log("relatedProducts", relatedProducts);
   return (
     <>
       <Container>

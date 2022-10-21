@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import Image from "next/image";
 import s from "./ProductCard.module.css";
 import Link from "next/link";
-import { Product, ProductForCard } from "@lib/bigcommerce/types/product";
+import { Product } from "@lib/bigcommerce/types/product";
 
 interface ProductSliderProps {
   product: Product;
@@ -11,17 +11,19 @@ interface ProductSliderProps {
 }
 
 export const ProductCard: FC<ProductSliderProps> = ({ product }) => {
-  console.log("product", product);
-
-  //This is a good use case to normalize your data from different sources.
+  // region
   const image =
     product?.defaultImage?.url640wide ||
     // @ts-ignore
-    product?.images?.edges[0]?.node?.urlOriginal ||
+    product?.images?.[0]?.url_standard ||
+    // @ts-ignore
+    product?.node?.images?.edges[0]?.node?.urlOriginal ||
     "";
 
   let path = product?.path || "";
-
+  // @ts-ignore
+  const name = product?.name || product?.node?.name;
+  // endregion
   return (
     <>
       <Link href={`/product/${path}`}>
@@ -36,7 +38,7 @@ export const ProductCard: FC<ProductSliderProps> = ({ product }) => {
               />
             )}
           </div>
-          <div className={s.name}>{product?.name}</div>
+          <div className={s.name}>{name}</div>
           <div className={s.price}>{product?.prices?.listPrice}</div>
         </div>
       </Link>

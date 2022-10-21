@@ -57,25 +57,23 @@ export type ProductVariant = {
 };
 
 export type Product = {
-  id: string;
-  objectID: string;
-  name: string;
-  description: string;
+  id?: string;
+  objectID?: string;
+  name?: string;
+  description?: string;
   descriptionHtml?: string;
-  warranty?: string; // STOREFRONT_AVAILABILITY_TEXT
-  shipping?: string; // STOREFRONT_WARRANTY_INFO
   sku?: SKU;
   slug?: string;
   path?: string;
   brand?: BrandInfo;
   defaultImage?: { url640wide: string };
   categories?: CategoryInfo[];
-  images: ProductImage[];
-  primary_image: ProductImage;
-  variants: ProductVariant[];
-  price: ProductPrice;
-  prices: ProductPrice;
-  options: ProductOption[];
+  images?: ProductImage[];
+  primary_image?: ProductImage;
+  variants?: ProductVariant[];
+  price?: ProductPrice;
+  prices?: ProductPrice;
+  options?: ProductOption[];
   custom_url?: { url: string; is_customized: boolean };
 };
 

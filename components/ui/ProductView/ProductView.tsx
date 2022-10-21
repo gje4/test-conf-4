@@ -14,8 +14,7 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
     .toString()
     .replace(/<div>&nbsp;<\/div>/g, "");
   const goodHtmlDescription = { __html: rawHtml };
-
-  console.log("product", product?.product?.prices?.price?.value);
+  console.log("relatedProducts 2", relatedProducts);
   const addToCart = async () => {
     try {
       fetch(`/api/cart`, {
@@ -29,7 +28,6 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
     }
   };
 
-  console.log("hmmmm", product);
   return (
     <Container>
       <div className="mx-auto  py-16 px-4 px-8">
